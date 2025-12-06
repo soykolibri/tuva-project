@@ -47,3 +47,9 @@ seeds:
       +post-hook: "{{ the_tuva_project.load_seed('tuva-public-resources/versioned_tuva_synthetic_data/0.15.0','pharmacy_claim.csv',headers=true) }}"
     provider_attribution:
       +post-hook: "{{ the_tuva_project.load_seed('tuva-public-resources/versioned_tuva_synthetic_data/0.15.0','provider_attribution.csv',headers=true) }}"
+
+models:
+  the_tuva_project_demo:
+    staging:
+      +materialized: view
+      schema: staging
