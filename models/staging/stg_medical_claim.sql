@@ -1,3 +1,5 @@
+{{ config(alias='medical_claim') }}
+
 with source as (
 
     select * from {{ source('tuva_project', 'medical_claim') }}
