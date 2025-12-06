@@ -1,52 +1,23 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=1.5.x&color=orange)
+## ✅ Take Home Submission
 
-# The Tuva Project Demo
+### Methodology
+1. How I defined "cancer" and handled data ambiguities
 
-## 🧰 What does this project do?
+c. I excluded Benign & Uncertain Neoplasms because ChatGPT suggested they were not cancer, but tumor-related.
 
-This demo provides a quick and easy way to run the Tuva Project 
-Package in a dbt project with synthetic data for 1k patients loaded as dbt seeds.
+### Key Findings
+1. A brief executive summary of the prevalence and top cost drivers found in the data.
 
-To set up the Tuva Project with your own claims data or to better understand what the Tuva Project does, please review the ReadMe in [The Tuva Project](https://github.com/tuva-health/the_tuva_project) package for a detailed walkthrough and setup.
+### AI Usage Log
+1. All changes were drafted within Cursor.
+2. I prompted Cursor to write jinja to loop over all diagnosis codes and assemble a deduped list for my staging model.
+3. I asked ChatGPT how best to isolate cancer codes from everything else. It suggested the Neoplasms section of ICD-10-CM codes.
+   a. It gave me a list of ranges for a variety of anatomical sites.
+   b. Cursor agent helped me change the ChatGPT ranges into a config block and macro.
+4. 
+A short section detailing how you used AI tools to accelerate the build
+(e.g., generating code lists, regex), and any instance where you had to correct the AI
 
-For information on the data models check out our [Docs](https://thetuvaproject.com/).
-
-## 🔌 Database Support
-
-- BigQuery
-- Databricks (community supported)
-- DuckDB (community supported)
-- Redshift
-- Snowflake
-- Microsoft Fabric
-
-## ✅ How to get started
-
-### Pre-requisites
-1. You have [dbt](https://www.getdbt.com/) installed and configured (i.e. connected to your data warehouse). If you have not installed dbt, [here](https://docs.getdbt.com/docs/get-started-dbt) are instructions for doing so.
-2. You have created a database for the output of this project to be written in your data warehouse.
-
-### Getting Started
-Complete the following steps to configure the project to run in your environment.
-
-1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repo to your local machine or environment.
-2. Update the `dbt_project.yml` file:
-   1. Add the dbt profile connected to your data warehouse.
-3. Run `dbt deps` to install the Tuva Project package. 
-4. Run `dbt build` to run the entire project with the built-in sample data.
-
-## 🙋🏻‍♀️ **How is this project maintained and can I contribute?**
-
-### Project Maintenance
-
-The Tuva Project team maintaining this project **only** maintains the latest version of the project. 
-We highly recommend you stay consistent with the latest version.
-
-### Contributions
-
-Have an opinion on the mappings? Notice any bugs when installing and running the project?
-If so, we highly encourage and welcome feedback!  While we work on a formal process in Github, we can be easily reached on our Slack community.
-
-## 🤝 Community
-
-Join our growing community of healthcare data practitioners on [Slack](https://join.slack.com/t/thetuvaproject/shared_invite/zt-16iz61187-G522Mc2WGA2mHF57e0il0Q)!
+### Notes on Prompt
+1. I didn't have the necessary tools pre-installed on my personal laptop, so there was some setup required before I could even attempt the data modeling. Installations and getting the repo set up took about 45 minutes. I assumed this setup time was not intended to be part of the recommended 2-3 hours to complete the exercise. It might be nice to clarify the time expectation for other folks who attempt the exercise.
+   a. Once the project was set up, `dbt deps && dbt build` took 1h 10m but I forgot to thread it. Might be faster for others if they think of this sooner than I did.
