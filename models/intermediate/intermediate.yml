@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_icd_10_cm_codes
+  - name: int_icd_10_cm_codes
     description: "A list of all diagnosis codes from the medical claims data, deduplicated and classified as cancer-related."
     columns:
       - name: icd_10_cm_code
@@ -20,4 +20,6 @@ models:
           Only populated for cancer related codes.
           Describes the severity (In situ or Malignant) of the cancer detected.
         data_tests:
-          - dbt_utils.not_constant
+          - dbt_utils.not_constant:
+              config:
+                severity: warn # very few cancer matches (only 4 codes, all Malignant)

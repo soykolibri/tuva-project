@@ -1,0 +1,6 @@
+sources:
+  - name: tuva_project
+    database: tuva_project
+    schema: input_layer
+    tables:
+      - name: medical_claim

@@ -5,7 +5,7 @@ with unioned as (
     {%- set diagnosis_cols = range(1, 25) -%}
     {%- for n in diagnosis_cols %}
         select diagnosis_code_{{ n }} as icd_10_cm_code
-        from {{ ref('medical_claim') }}
+        from {{ ref('stg_medical_claim') }}
         where
             coalesce(diagnosis_code_type, '') = 'icd-10-cm'
             and diagnosis_code_{{ n }} is not null
