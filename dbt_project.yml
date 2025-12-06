@@ -53,3 +53,10 @@ models:
     staging:
       +materialized: view
       schema: staging
+    intermediate:
+      +materialized: table
+      schema: dbt_prep
+    mart:
+      +materialized: table
+      finance:
+        schema: finance
