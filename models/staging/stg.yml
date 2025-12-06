@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_icd_10_cm_codes
+    description: "A list of all diagnosis codes from the medical claims data, deduplicated and classified as cancer-related."
+    columns:
+      - name: icd_10_cm_code
+        description: "The ICD-10-CM code for the diagnosis."
+        data_tests:
+          - unique
+          - not_null
+      - name: cancer_anatomical_site
+        description: >
+          Only populated for cancer related codes.
+          Describes the anatomical site at which the cancer was detected.
+        data_tests:
+          - dbt_utils.not_constant
+      - name: cancer_severity
+        description: >
+          Only populated for cancer related codes.
+          Describes the severity (In situ or Malignant) of the cancer detected.
+        data_tests:
+          - dbt_utils.not_constant
