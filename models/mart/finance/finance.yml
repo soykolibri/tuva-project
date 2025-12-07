@@ -1,0 +1,171 @@
+models:
+  - name: agg_cancer_medical_claims_by_care_setting
+    description: >
+      An aggregate table summarizing number of claims and total spend,
+      by diagnosis ICD-10-CM code and place of service code.
+
+      The claim must contain at least one cancer-related diagnosis code to be
+      included in this table.
+      
+      The table provides all-time statistics as well as drill-down versions
+      of each metric.
+
+      The drill-downs slice and dice by claim status (in network, out of network,
+      total) and time periods (last 90 days, last 180 days, last 365 days, last
+      730 days, and all time).
+
+      The time windows allow for easy comparisons showing change in prevalence
+      over time. Ex: to get year-over-year comparisons for an ICD-10-CM code,
+      simply subtract (l730 - l365) and compare that to l365. This would be the most
+      recent year compared to the year prior.
+    columns:
+      - name: diagnosis_code_place_of_service_key
+        description: >
+          Surrogate key combining ICD-10-CM diagnosis code and place of service code.
+          Uniquely identifies each row in the aggregate table.
+        data_tests:
+          - unique
+          - not_null
+      - name: icd_10_cm_code
+        description: >
+          The ICD-10-CM diagnosis code. Only cancer-related codes (C00-D09) are included
+          in this table.
+        data_tests:
+          - not_null
+      - name: cancer_anatomical_site
+        description: >
+          The anatomical site where the cancer was detected. Examples include:
+          "Lip, oral cavity, pharynx", "Digestive organs", "Breast", etc.
+        data_tests:
+          - not_null
+      - name: cancer_severity
+        description: >
+          The severity classification of the cancer: "Malignant" or "In situ".
+        data_tests:
+          - not_null
+      - name: place_of_service_code
+        description: >
+          The place of service code indicating where the medical service was provided.
+          This is a numeric code that maps to specific care settings (e.g., hospital,
+          outpatient facility, physician office).
+      - name: n_claims_in_network_l90
+        description: >
+          Count of distinct claims in the last 90 days where the claim was in-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_in_network_l180
+        description: >
+          Count of distinct claims in the last 180 days where the claim was in-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_in_network_l365
+        description: >
+          Count of distinct claims in the last 365 days where the claim was in-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_in_network_l730
+        description: >
+          Count of distinct claims in the last 730 days where the claim was in-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_in_network_alltime
+        description: >
+          Count of distinct claims across all time where the claim was in-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_out_of_network_l90
+        description: >
+          Count of distinct claims in the last 90 days where the claim was out-of-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_out_of_network_l180
+        description: >
+          Count of distinct claims in the last 180 days where the claim was out-of-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_out_of_network_l365
+        description: >
+          Count of distinct claims in the last 365 days where the claim was out-of-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_out_of_network_l730
+        description: >
+          Count of distinct claims in the last 730 days where the claim was out-of-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_out_of_network_alltime
+        description: >
+          Count of distinct claims across all time where the claim was out-of-network
+          and matched this diagnosis code and place of service.
+      - name: n_claims_total_l90
+        description: >
+          Count of distinct claims in the last 90 days (regardless of network status)
+          that matched this diagnosis code and place of service.
+      - name: n_claims_total_l180
+        description: >
+          Count of distinct claims in the last 180 days (regardless of network status)
+          that matched this diagnosis code and place of service.
+      - name: n_claims_total_l365
+        description: >
+          Count of distinct claims in the last 365 days (regardless of network status)
+          that matched this diagnosis code and place of service.
+      - name: n_claims_total_l730
+        description: >
+          Count of distinct claims in the last 730 days (regardless of network status)
+          that matched this diagnosis code and place of service.
+      - name: n_claims_total_alltime
+        description: >
+          Count of distinct claims across all time (regardless of network status)
+          that matched this diagnosis code and place of service.
+      - name: total_cost_amount_in_network_l90
+        description: >
+          Sum of total cost amount for claims in the last 90 days where the claim was
+          in-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_in_network_l180
+        description: >
+          Sum of total cost amount for claims in the last 180 days where the claim was
+          in-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_in_network_l365
+        description: >
+          Sum of total cost amount for claims in the last 365 days where the claim was
+          in-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_in_network_l730
+        description: >
+          Sum of total cost amount for claims in the last 730 days where the claim was
+          in-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_in_network_alltime
+        description: >
+          Sum of total cost amount for claims across all time where the claim was
+          in-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_out_of_network_l90
+        description: >
+          Sum of total cost amount for claims in the last 90 days where the claim was
+          out-of-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_out_of_network_l180
+        description: >
+          Sum of total cost amount for claims in the last 180 days where the claim was
+          out-of-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_out_of_network_l365
+        description: >
+          Sum of total cost amount for claims in the last 365 days where the claim was
+          out-of-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_out_of_network_l730
+        description: >
+          Sum of total cost amount for claims in the last 730 days where the claim was
+          out-of-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_out_of_network_alltime
+        description: >
+          Sum of total cost amount for claims across all time where the claim was
+          out-of-network and matched this diagnosis code and place of service.
+      - name: total_cost_amount_total_l90
+        description: >
+          Sum of total cost amount for claims in the last 90 days (regardless of network
+          status) that matched this diagnosis code and place of service.
+      - name: total_cost_amount_total_l180
+        description: >
+          Sum of total cost amount for claims in the last 180 days (regardless of network
+          status) that matched this diagnosis code and place of service.
+      - name: total_cost_amount_total_l365
+        description: >
+          Sum of total cost amount for claims in the last 365 days (regardless of network
+          status) that matched this diagnosis code and place of service.
+      - name: total_cost_amount_total_l730
+        description: >
+          Sum of total cost amount for claims in the last 730 days (regardless of network
+          status) that matched this diagnosis code and place of service.
+      - name: total_cost_amount_total_alltime
+        description: >
+          Sum of total cost amount for claims across all time (regardless of network
+          status) that matched this diagnosis code and place of service.
+     
